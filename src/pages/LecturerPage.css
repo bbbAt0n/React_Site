@@ -1,0 +1,111 @@
+.lecturer-page {
+  gap: 48px;
+  padding-block-end: var(--space-8);
+}
+
+.lecturer-page__back a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.lecturer-page__hero {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.lecturer-page__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.lecturer-page__intro .lecturer-meta {
+  width: 100%;
+}
+
+.lecturer-page__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.lecturer-page__section .tariff-list {
+  width: min(40rem, 100%);
+}
+
+.lecturer-page__courses {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.lecturer-course {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.lecturer-course h3 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.lecturer-course__lead {
+  max-width: 65ch;
+  color: var(--color-muted);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.lecturer-course__lead::first-letter {
+  text-transform: uppercase;
+}
+
+.lecturer-course__topics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 72ch;
+  padding-inline-start: 1.5em;
+  list-style: decimal;
+}
+
+.lecturer-course__topics li {
+  line-height: 1.5;
+  padding-inline-start: 0.25em;
+  overflow-wrap: break-word;
+}
+
+.lecturer-course__topic-title {
+  font-weight: var(--font-weight-semibold);
+}
+
+.lecturer-course__topic-summary::before {
+  content: ": ";
+}
+
+.lecturer-page__booking {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.lecturer-page__booking p {
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+@media (width < 73.125rem) {
+  .lecturer-page__hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

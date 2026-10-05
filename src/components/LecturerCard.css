@@ -1,0 +1,120 @@
+.lecturer-card {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-areas:
+    "photo info"
+    "offer offer";
+  column-gap: 40px;
+  row-gap: 40px;
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  color: inherit;
+  box-shadow: var(--shadow-border);
+}
+
+.lecturer-card__photo {
+  grid-area: photo;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lecturer-card__photo:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.lecturer-card__info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.lecturer-card__name {
+  font-size: 2rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.lecturer-card__name a,
+.page .lecturer-card__name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.lecturer-card__name a:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.lecturer-card__info .lecturer-meta {
+  width: 100%;
+}
+
+.lecturer-card__offer {
+  grid-area: offer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.lecturer-card__teaser {
+  max-width: 65ch;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.lecturer-card__offer .tariff-list {
+  width: min(40rem, 100%);
+}
+
+.lecturer-card__cta {
+  padding-inline: 0;
+}
+
+@media (hover: hover) {
+  .lecturer-card:hover {
+    box-shadow: var(--shadow-border-hover);
+  }
+
+  .lecturer-card:hover .lecturer-card__cta {
+    text-decoration-line: underline;
+  }
+
+  .lecturer-card__name a:hover {
+    text-decoration-line: underline;
+    text-underline-offset: 0.18em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lecturer-card {
+    transition-property: box-shadow;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+@media (width < 73.125rem) {
+  .lecturer-card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "photo"
+      "info"
+      "offer";
+    row-gap: var(--space-6);
+    padding: var(--space-4);
+  }
+}
+
+@media (forced-colors: active) {
+  .lecturer-card {
+    border: 1px solid CanvasText;
+    box-shadow: none;
+  }
+}

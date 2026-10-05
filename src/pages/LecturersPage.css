@@ -1,0 +1,44 @@
+.lecturers-page {
+  gap: var(--space-8);
+  padding-block-end: var(--space-8);
+}
+
+.lecturers-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.lecturers-page__header p {
+  max-width: 65ch;
+  color: var(--color-muted);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.lecturers-page__search {
+  width: min(40rem, 100%);
+}
+
+.lecturers-page__status {
+  max-width: none;
+  color: var(--color-muted);
+}
+
+.lecturers-page__status:empty {
+  display: none;
+}
+
+.lecturers-page__empty h2 {
+  font-size: 1.25rem;
+}
+
+.lecturers-page__empty p {
+  overflow-wrap: anywhere;
+}
+
+.lecturers-page__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}

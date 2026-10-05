@@ -1,0 +1,26 @@
+.tariff-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.tariff-list__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+.tariff-list__name {
+  flex: 1 1 16rem;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.tariff-list__price {
+  flex: 0 0 auto;
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}

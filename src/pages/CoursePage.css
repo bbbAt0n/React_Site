@@ -1,0 +1,76 @@
+.course-page {
+  gap: 48px;
+  padding-block-end: var(--space-8);
+}
+
+.course-page__back a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.course-page__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.course-page__lead {
+  max-width: 65ch;
+  color: var(--color-muted);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.course-page__lead::first-letter {
+  text-transform: uppercase;
+}
+
+.course-page__lecturer {
+  max-width: none;
+}
+
+.course-page__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.course-page__section .tariff-list {
+  width: min(40rem, 100%);
+}
+
+.course-page__topics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 72ch;
+  padding-inline-start: 1.5em;
+  list-style: decimal;
+}
+
+.course-page__topics li {
+  line-height: 1.5;
+  padding-inline-start: 0.25em;
+  overflow-wrap: break-word;
+}
+
+.course-page__topic-title {
+  font-weight: var(--font-weight-semibold);
+}
+
+.course-page__topic-summary::before {
+  content: ": ";
+}
+
+.course-page__booking {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.course-page__booking p {
+  color: var(--color-muted);
+  line-height: 1.55;
+}

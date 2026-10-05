@@ -1,0 +1,29 @@
+.courses-page {
+  gap: var(--space-8);
+  padding-block-end: var(--space-8);
+}
+
+.courses-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.courses-page__header p {
+  max-width: 65ch;
+  color: var(--color-muted);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.courses-page__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+@media (width < 73.125rem) {
+  .courses-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

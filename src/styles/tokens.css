@@ -1,0 +1,58 @@
+:root {
+  --color-surface: #ffffff;
+  --color-text: #000000;
+  --color-text-on-header: #ffffff;
+  --color-header-from: #9db1d2;
+  --color-header-via: #8cb6fb;
+  --color-header-to: #adacaa;
+  --color-cta: #374ee4;
+  --color-on-cta: #ffffff;
+  --color-photo-underline: #1717e5;
+  --color-photo-placeholder: #d9d9d9;
+  --color-focus: #1717e5;
+  --color-skip-bg: #ffffff;
+  --color-skip-text: #000000;
+  --color-muted: #3d3d3d;
+  --color-danger: #b42318;
+  --color-success: #05603a;
+  --color-input-border: oklch(0 0 0 / 0.16);
+  --color-footer-border: oklch(0 0 0 / 0.1);
+  --color-image-outline: oklch(0 0 0 / 0.1);
+
+  --shadow-border:
+    0 0 0 1px oklch(0 0 0 / 0.06), 0 1px 2px -1px oklch(0 0 0 / 0.06),
+    0 2px 4px 0 oklch(0 0 0 / 0.04);
+  --shadow-border-hover:
+    0 0 0 1px oklch(0 0 0 / 0.1), 0 2px 4px -1px oklch(0 0 0 / 0.08),
+    0 8px 16px -4px oklch(0 0 0 / 0.1);
+
+  --font-ui: "Inter", system-ui, sans-serif;
+  --font-partners: "Montserrat", system-ui, sans-serif;
+
+  --font-size-body: 1rem;
+  --font-size-cta: 16px;
+  --font-size-nav: 32px;
+  --font-size-hero: 36px;
+  --font-size-partners: 16px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --radius-header: 15px;
+  --radius-card: 12px;
+
+  --layout-width: 1170px;
+  /* Ниже макета 1170px сетки складываются в колонку.
+     В @media пишите 73.125rem — переменные там не работают. */
+  --navbar-width: 1159px;
+  --navbar-height: 65px;
+  --navbar-pad-inline-start: 47px;
+  --header-offset-top: 13px;
+
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+}

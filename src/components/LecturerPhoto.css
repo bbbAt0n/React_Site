@@ -1,0 +1,19 @@
+.lecturer-photo {
+  position: relative;
+  width: min(472px, 100%);
+  aspect-ratio: 472 / 317;
+  margin: 0;
+  overflow: clip;
+}
+
+.lecturer-photo__image {
+  position: absolute;
+  inset-inline-start: calc(13 / 472 * 100%);
+  top: calc(28 / 317 * 100%);
+  width: calc(434 / 472 * 100%);
+  height: calc(289 / 317 * 100%);
+  max-width: none;
+  object-fit: cover;
+  outline: 1px solid var(--color-image-outline);
+  outline-offset: -1px;
+}

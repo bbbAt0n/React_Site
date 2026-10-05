@@ -1,0 +1,46 @@
+.lecturer-portrait {
+  width: 220px;
+  max-width: 100%;
+}
+
+.lecturer-portrait__image,
+.lecturer-portrait__placeholder {
+  width: 220px;
+  max-width: 100%;
+  aspect-ratio: 220 / 235;
+  height: auto;
+  background: var(--color-photo-placeholder);
+}
+
+.lecturer-portrait__image {
+  object-fit: cover;
+  object-position: 50% 12%;
+  outline: 1px solid var(--color-image-outline);
+  outline-offset: -1px;
+}
+
+.lecturer-portrait__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.lecturer-portrait::after {
+  content: "";
+  display: block;
+  width: min(228px, 100%);
+  height: 7px;
+  margin-block-start: 18px;
+  margin-inline-start: -4px;
+  background: var(--color-photo-underline);
+}
+
+@media (width < 73.125rem) {
+  .lecturer-portrait::after {
+    margin-inline-start: 0;
+  }
+}
