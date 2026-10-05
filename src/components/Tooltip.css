@@ -1,0 +1,87 @@
+.tooltip {
+  position: fixed;
+  z-index: 10000;
+  max-width: 320px;
+  padding: 8px 12px;
+  background: #18191f;
+  color: #ffffff;
+  font-family: var(--font-ui, "Inter", system-ui, sans-serif);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  border-radius: 8px;
+  box-shadow:
+    0 4px 6px -1px oklch(0 0 0 / 0.2),
+    0 10px 15px -3px oklch(0 0 0 / 0.25);
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.tooltip--measuring {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tooltip--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip--top.tooltip--visible {
+  animation: tooltip-fade-top 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tooltip--bottom.tooltip--visible {
+  animation: tooltip-fade-bottom 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tooltip-fade-top {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tooltip-fade-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltip__content {
+  position: relative;
+  z-index: 2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.tooltip__arrow {
+  position: absolute;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  background: #18191f;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.tooltip--top .tooltip__arrow {
+  bottom: -4px;
+}
+
+.tooltip--bottom .tooltip__arrow {
+  top: -4px;
+}
+
+.tooltip-trigger {
+  outline: none;
+}
