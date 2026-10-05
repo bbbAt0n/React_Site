@@ -156,38 +156,60 @@ export function LecturerMeta({
         <dd>{education}</dd>
       </div>
 
-      <Tooltip
-        as="div"
-        className="lecturer-meta__item lecturer-meta__item--interactive"
-        content={getExperienceTooltip(experienceYears)}
-        ariaLabel={`Стаж: ${formatExperience(experienceYears)}`}
-      >
+      <div>
         <dt>
           <ExperienceIcon />
-          Стаж
-          <span className="lecturer-meta__info-badge" title="Подробнее о стаже">
-            <InfoIcon />
-          </span>
+          <Tooltip
+            content={getExperienceTooltip(experienceYears)}
+            placement="right"
+          >
+            <span className="lecturer-meta__trigger">
+              Стаж
+              <span className="lecturer-meta__info-badge" aria-label="Подробнее о стаже">
+                <InfoIcon />
+              </span>
+            </span>
+          </Tooltip>
         </dt>
-        <dd>{formatExperience(experienceYears)}</dd>
-      </Tooltip>
+        <dd>
+          <Tooltip
+            content={getExperienceTooltip(experienceYears)}
+            placement="right"
+          >
+            <span className="lecturer-meta__trigger lecturer-meta__trigger--value">
+              {formatExperience(experienceYears)}
+            </span>
+          </Tooltip>
+        </dd>
+      </div>
 
       {degree ? (
-        <Tooltip
-          as="div"
-          className="lecturer-meta__item lecturer-meta__item--interactive"
-          content={getDegreeTooltip(degree)}
-          ariaLabel={`Учёная степень: ${degree}`}
-        >
+        <div>
           <dt>
             <DegreeIcon />
-            Учёная степень
-            <span className="lecturer-meta__info-badge" title="Подробнее об учёной степени">
-              <InfoIcon />
-            </span>
+            <Tooltip
+              content={getDegreeTooltip(degree)}
+              placement="right"
+            >
+              <span className="lecturer-meta__trigger">
+                Учёная степень
+                <span className="lecturer-meta__info-badge" aria-label="Подробнее об учёной степени">
+                  <InfoIcon />
+                </span>
+              </span>
+            </Tooltip>
           </dt>
-          <dd>{degree}</dd>
-        </Tooltip>
+          <dd>
+            <Tooltip
+              content={getDegreeTooltip(degree)}
+              placement="right"
+            >
+              <span className="lecturer-meta__trigger lecturer-meta__trigger--value">
+                {degree}
+              </span>
+            </Tooltip>
+          </dd>
+        </div>
       ) : null}
 
       {showFormats ? (

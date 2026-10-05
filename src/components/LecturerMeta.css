@@ -32,29 +32,36 @@
     text-wrap: pretty;
 }
 
-.lecturer-meta__item--interactive {
+.lecturer-meta__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     cursor: help;
-    border-radius: 6px;
-    padding: 2px 4px;
-    margin: -2px -4px;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    border-radius: 4px;
+    color: inherit;
+    transition: color 0.15s ease;
 }
 
-.lecturer-meta__item--interactive:hover dt,
-.lecturer-meta__item--interactive:focus-visible dt {
+.lecturer-meta__trigger:hover,
+.lecturer-meta__trigger:focus-visible {
     color: var(--color-cta);
 }
 
-.lecturer-meta__item--interactive:hover .lecturer-meta__info-badge,
-.lecturer-meta__item--interactive:focus-visible .lecturer-meta__info-badge {
-    color: var(--color-on-cta);
-    background: var(--color-cta);
-    border-color: var(--color-cta);
-}
-
-.lecturer-meta__item--interactive:focus-visible {
+.lecturer-meta__trigger:focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 2px;
+}
+
+.lecturer-meta__trigger--value {
+    border-bottom: 1px dashed var(--color-input-border);
+    transition: border-color 0.15s ease, color 0.15s ease;
+    width: fit-content;
+}
+
+.lecturer-meta__trigger--value:hover,
+.lecturer-meta__trigger--value:focus-visible {
+    border-bottom-color: var(--color-cta);
+    color: var(--color-cta);
 }
 
 .lecturer-meta__info-badge {
@@ -66,10 +73,16 @@
     border-radius: 50%;
     border: 1px solid var(--color-input-border);
     color: var(--color-muted);
-    margin-inline-start: 4px;
     transition: all 0.15s ease;
     vertical-align: middle;
     flex-shrink: 0;
+}
+
+.lecturer-meta__trigger:hover .lecturer-meta__info-badge,
+.lecturer-meta__trigger:focus-visible .lecturer-meta__info-badge {
+    color: var(--color-on-cta);
+    background: var(--color-cta);
+    border-color: var(--color-cta);
 }
 
 .lecturer-meta__info-icon {
@@ -102,7 +115,7 @@
 }
 
 @media (forced-colors: active) {
-    \n .lecturer-meta__disciplines {
+    .lecturer-meta__disciplines {
         border-block-start: 1px solid CanvasText;
     }
 

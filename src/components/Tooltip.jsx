@@ -14,9 +14,10 @@ import "./Tooltip.css";
 export function Tooltip({
   content,
   children,
-  as: Component = "div",
+  as: Component = "span",
   className = "",
-  offset = 8,
+  placement = "right",
+  offset = 10,
   disabled = false,
   tabIndex = 0,
   ariaLabel,
@@ -71,42 +72,106 @@ export function Tooltip({
       }
 
       const padding = 12;
-      const spaceAbove = triggerRect.top;
-      const spaceBelow = window.innerHeight - triggerRect.bottom;
+      const gap = offset;
 
-      // Prefer placing above if enough space, otherwise below
-      const placeTop =
-        spaceAbove >= tooltipRect.height + offset || spaceAbove >= spaceBelow;
+      const spaceRight = window.innerWidth - triggerRect.right - padding;
+      const spaceLeft = triggerRect.left - padding;
+      const spaceAbove = triggerRect.top - padding;
+      const spaceBelow = window.innerHeight - triggerRect.bottom - padding;
 
-      const top = placeTop
-        ? triggerRect.top - tooltipRect.height - offset
-        : triggerRect.bottom + offset;
+      // Determine actual placement based on preferred placement and available space
+      let actualPlacement = placement;
 
-      // Horizontal centering relative to trigger element
-      const triggerCenter = triggerRect.left + triggerRect.width / 2;
-      let left = triggerCenter - tooltipRect.width / 2;
+      if (placement === "right") {
+        if (spaceRight >= tooltipRect.width + gap) {
+          actualPlacement = "right";
+        } else if (spaceLeft >= tooltipRect.width + gap) {
+          actualPlacement = "left";
+        } else if (spaceAbove >= tooltipRect.height + gap) {
+          actualPlacement = "top";
+        } else {
+          actualPlacement = "bottom";
+        }
+      } else if (placement === "top") {
+        if (spaceAbove >= tooltipRect.height + gap) {
+          actualPlacement = "top";
+        } else if (spaceBelow >= tooltipRect.height + gap) {
+          actualPlacement = "bottom";
+        } else if (spaceRight >= tooltipRect.width + gap) {
+          actualPlacement = "right";
+        } else {
+          actualPlacement = "left";
+        }
+      }
 
-      // Boundary constraint within viewport
-      const maxLeft = window.innerWidth - tooltipRect.width - padding;
-      const minLeft = padding;
-      left = Math.max(minLeft, Math.min(left, maxLeft));
+      let top;
+      let left;
+      let arrowTop = 0;
+      let arrowLeft = 0;
 
-      // Pointer arrow position relative to tooltip box
-      const arrowLeft = Math.max(
-        12,
-        Math.min(triggerCenter - left, tooltipRect.width - 12)
-      );
+      if (actualPlacement === "right") {
+        left = triggerRect.right + gap;
+        const triggerCenterY = triggerRect.top + triggerRect.height / 2;
+        top = triggerCenterY - tooltipRect.height / 2;
+        top = Math.max(
+          padding,
+          Math.min(top, window.innerHeight - tooltipRect.height - padding)
+        );
+        arrowTop = triggerCenterY - top;
+        arrowTop = Math.max(12, Math.min(arrowTop, tooltipRect.height - 12));
+      } else if (actualPlacement === "left") {
+        left = triggerRect.left - tooltipRect.width - gap;
+        const triggerCenterY = triggerRect.top + triggerRect.height / 2;
+        top = triggerCenterY - tooltipRect.height / 2;
+        top = Math.max(
+          padding,
+          Math.min(top, window.innerHeight - tooltipRect.height - padding)
+        );
+        arrowTop = triggerCenterY - top;
+        arrowTop = Math.max(12, Math.min(arrowTop, tooltipRect.height - 12));
+      } else if (actualPlacement === "top") {
+        top = triggerRect.top - tooltipRect.height - gap;
+        const triggerCenterX = triggerRect.left + triggerRect.width / 2;
+        left = triggerCenterX - tooltipRect.width / 2;
+        left = Math.max(
+          padding,
+          Math.min(left, window.innerWidth - tooltipRect.width - padding)
+        );
+        arrowLeft = triggerCenterX - left;
+        arrowLeft = Math.max(12, Math.min(arrowLeft, tooltipRect.width - 12));
+      } else {
+        // bottom
+        top = triggerRect.bottom + gap;
+        const triggerCenterX = triggerRect.left + triggerRect.width / 2;
+        left = triggerCenterX - tooltipRect.width / 2;
+        left = Math.max(
+          padding,
+          Math.min(left, window.innerWidth - tooltipRect.width - padding)
+        );
+        arrowLeft = triggerCenterX - left;
+        arrowLeft = Math.max(12, Math.min(arrowLeft, tooltipRect.width - 12));
+      }
 
       tooltip.style.top = `${top}px`;
       tooltip.style.left = `${left}px`;
-      tooltip.classList.toggle("tooltip--top", placeTop);
-      tooltip.classList.toggle("tooltip--bottom", !placeTop);
-      tooltip.classList.add("tooltip--visible");
+      tooltip.classList.remove(
+        "tooltip--top",
+        "tooltip--bottom",
+        "tooltip--left",
+        "tooltip--right"
+      );
+      tooltip.classList.add(`tooltip--${actualPlacement}`, "tooltip--visible");
       tooltip.style.visibility = "visible";
       tooltip.style.opacity = "1";
 
       if (arrow) {
-        arrow.style.left = `${arrowLeft}px`;
+        if (actualPlacement === "right" || actualPlacement === "left") {
+          arrow.style.top = `${arrowTop}px`;
+          arrow.style.left = "";
+        } else {
+          arrow.style.left = `${arrowLeft}px`;
+          arrow.style.top = "";
+        }
       }
     };
 
@@ -124,7 +189,7 @@ export function Tooltip({
       });
       window.removeEventListener("resize", updatePosition);
     };
-  }, [isOpen, offset]);
+  }, [isOpen, offset, placement]);
 
   const handleMouseEnter = () => {
     if (!disabled && content) {
