@@ -1,5 +1,23 @@
 import { formatExperience } from "../data/format.js";
+import { Tooltip } from "./Tooltip.jsx";
 import "./LecturerMeta.css";
+
+function getExperienceTooltip(years) {
+  if (!years) return "Стаж преподавательской и исследовательской работы";
+  return `Общий стаж работы: ${formatExperience(years)}. Включает преподавание, научные исследования и руководство практическими проектами.`;
+}
+
+function getDegreeTooltip(degree) {
+  if (!degree) return "Информация об учёной степени";
+  const normalized = degree.toLowerCase();
+  if (normalized.includes("доктор")) {
+    return `${degree[0].toUpperCase() + degree.slice(1)} — высшая учёная степень в РФ, присуждаемая за выдающиеся научные достижения и фундаментальные труды.`;
+  }
+  if (normalized.includes("кандидат")) {
+    return `${degree[0].toUpperCase() + degree.slice(1)} — учёная степень первой ступени в РФ, присуждаемая после публичной защиты кандидатской диссертации.`;
+  }
+  return `Учёная степень: ${degree}. Подтверждает официальную академическую квалификацию лектора.`;
+}
 
 function Icon({ children }) {
   return (
@@ -10,6 +28,20 @@ function Icon({ children }) {
       aria-hidden="true"
     >
       {children}
+    </svg>
+  );
+}
+
+function InfoIcon() {
+  return (
+    <svg
+      className="lecturer-meta__info-icon"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle cx="8" cy="8" r="6.75" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M8 7v4.5M8 4.75h.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -123,22 +155,63 @@ export function LecturerMeta({
         </dt>
         <dd>{education}</dd>
       </div>
+
       <div>
         <dt>
           <ExperienceIcon />
-          Стаж
+          <Tooltip
+            content={getExperienceTooltip(experienceYears)}
+            placement="right"
+          >
+            <span className="lecturer-meta__trigger">
+              Стаж
+              <span className="lecturer-meta__info-badge" aria-label="Подробнее о стаже">
+                <InfoIcon />
+              </span>
+            </span>
+          </Tooltip>
         </dt>
-        <dd>{formatExperience(experienceYears)}</dd>
+        <dd>
+          <Tooltip
+            content={getExperienceTooltip(experienceYears)}
+            placement="right"
+          >
+            <span className="lecturer-meta__trigger lecturer-meta__trigger--value">
+              {formatExperience(experienceYears)}
+            </span>
+          </Tooltip>
+        </dd>
       </div>
+
       {degree ? (
         <div>
           <dt>
             <DegreeIcon />
-            Учёная степень
+            <Tooltip
+              content={getDegreeTooltip(degree)}
+              placement="right"
+            >
+              <span className="lecturer-meta__trigger">
+                Учёная степень
+                <span className="lecturer-meta__info-badge" aria-label="Подробнее об учёной степени">
+                  <InfoIcon />
+                </span>
+              </span>
+            </Tooltip>
           </dt>
-          <dd>{degree}</dd>
+          <dd>
+            <Tooltip
+              content={getDegreeTooltip(degree)}
+              placement="right"
+            >
+              <span className="lecturer-meta__trigger lecturer-meta__trigger--value">
+                {degree}
+              </span>
+            </Tooltip>
+          </dd>
         </div>
       ) : null}
+
       {showFormats ? (
         <div>
           <dt>
@@ -154,6 +227,7 @@ export function LecturerMeta({
           </dd>
         </div>
       ) : null}
+
       {disciplines?.length ? (
         <div className="lecturer-meta__disciplines">
           <dt>
